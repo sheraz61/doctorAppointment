@@ -5,7 +5,7 @@ function Header() {
     return (
         <div className='flex flex-col md:flex-row flex-wrap bg-[#5f5FFF] rounded-lg px-6 md:px-10 lg:px-20'>
             {/* left side */}
-            <div className='md:w-1/2 flex flex-col items-start justify-center gap-4 py-10 m-auto md:py-10vw] md:mb-[-30]'>
+            <div className='md:w-1/2 flex flex-col items-start justify-center gap-4 py-10 m-auto md:py-10vw] md:mb-[-30px]'>
                 <p className='text-3xl md:text-4xl lg:text-5xl text-white font-semibold leading-tight md:leading-tight lg:leading-tight'>
                     Book Appointment <br /> with Trusted Doctors
                 </p>
