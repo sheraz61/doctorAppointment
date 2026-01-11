@@ -95,11 +95,12 @@ export const loginAdmin = async (req, res) => {
 
 export const allDoctors=async(req,res)=>{
 try {
-    const docotrs = await doctorModel.find({}).select('-password')
-    res.json({
+    const doctors = await doctorModel.find({}).select('-password')
+ res.json({
         success:true,
-        docotrs
+        doctors
     })
+    
 } catch (error) {
     res.json({success:false,message:error.message})
 }
