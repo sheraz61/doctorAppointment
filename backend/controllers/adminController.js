@@ -74,10 +74,10 @@ export const loginAdmin = async (req, res) => {
             const token = jwt.sign(email + password, process.env.JWT_SECRET)
             res.json({
                 success: true,
-                message: 'session created.....'
+                token
             })
         } else {
-            res.josn({
+            res.json({
                 success: false,
                 message: 'invalid credentials....'
             })
@@ -89,5 +89,19 @@ export const loginAdmin = async (req, res) => {
             message: error.message
         })
     }
+}
+
+// api for return all doctor...
+
+export const allDoctors=async(req,res)=>{
+try {
+    const docotrs = await doctorModel.find({}).select('-password')
+    res.json({
+        success:true,
+        docotrs
+    })
+} catch (error) {
+    res.json({success:false,message:error.message})
+}
 }
 
