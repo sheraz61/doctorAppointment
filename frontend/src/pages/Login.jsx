@@ -1,32 +1,34 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { AppContext } from '../context/AppContext'
 import axios from 'axios'
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 function Login() {
-  const navigate=useNavigate()
+  const navigate = useNavigate()
   const [state, setState] = useState('Sign Up')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [name, setName] = useState('')
-const {backendUrl,token,setToken}=useContext(AppContext)
+  const { backendUrl, token, setToken } = useContext(AppContext)
   const onSubmitHandler = async (e) => {
     e.preventDefault()
     try {
-      if (state==='Sign Up'){
-        const {data}=await axios.post(backendUrl+'/api/user/register',{name,email,password})
-        if (data.success){
-          localStorage.setItem('token',data.token)
+      if (state === 'Sign Up') {
+        const { data } = await axios.post(backendUrl + '/api/user/register', { name, email, password })
+        if (data.success) {
+          localStorage.setItem('token', data.token)
           setToken(data.token)
-        }else{
+        } else {
           toast.error(data.message)
         }
-      }else{
-        const {data}=await axios.post(backendUrl+'/api/user/login',{email,password})
-        if (data.success){
-          localStorage.setItem('token',data.token)
+      } else {
+        const { data } = await axios.post(backendUrl + '/api/user/login', { email, password })
+        if (data.success) {
+          console.log(data);
+          
+          localStorage.setItem('token', data.token)
           setToken(data.token)
-        }else{
+        } else {
           toast.error(data.message)
         }
       }
@@ -36,9 +38,11 @@ const {backendUrl,token,setToken}=useContext(AppContext)
 
   }
 
-  useEffect(()=>{
-navigate('/')
-  },[token])
+  useEffect(() => {
+    if (token) {
+    navigate('/')
+  }
+  }, [token])
 
   return (
     <form onSubmit={onSubmitHandler} className='min-h-[80vh] flex items-center'>
